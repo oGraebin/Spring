@@ -4,20 +4,20 @@ import java.nio.charset.Charset;
 import java.util.Optional;
 
 import org.apache.commons.codec.binary.Base64;
-import org.generation.Loja.model.UsuarioTest;
-import org.generation.Loja.model.UsuarioLoginTest;
-import org.generation.Loja.repository.UsuarioRepository;
+import org.generation.Loja.model.Usuario;
+import org.generation.Loja.model.UsuarioLogin;
+import org.generation.Loja.repository.UsuarioRepositoryTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioService {
+public class UsuarioServiceTest {
 
 	@Autowired
-	private UsuarioRepository repository;
+	private UsuarioRepositoryTest repository;
 
-	public UsuarioTest CadastrarUsuario(UsuarioTest usuario) {
+	public Usuario CadastrarUsuario(Usuario usuario) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 		String senhaEncoder = encoder.encode(usuario.getSenha());
@@ -26,10 +26,10 @@ public class UsuarioService {
 		return repository.save(usuario);
 	}
 
-	public Optional<UsuarioLoginTest> Logar(Optional<UsuarioLoginTest> user) {
+	public Optional<UsuarioLogin> Logar(Optional<UsuarioLogin> user) {
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Optional<UsuarioTest> usuario = repository.findByUsuario(user.get().getUsuario());
+		Optional<Usuario> usuario = repository.findByUsuario(user.get().getUsuario());
 
 		if (usuario.isPresent()) {
 			if (encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {

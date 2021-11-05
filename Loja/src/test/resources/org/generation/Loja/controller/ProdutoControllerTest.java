@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/produto")
-public class ProdutoController {
+public class ProdutoControllerTest {
 	@Autowired
 private ProdutoRepositoryTest repository;
 
